@@ -35,7 +35,7 @@ Jika bioskop melakukan pembatalan jadwal tayang (status _Cancelled_):
 
 1.  **Block Payment**: Sistem secara otomatis memblokir semua proses pembayaran yang sedang berlangsung untuk jadwal tersebut.
 2.  **Async Refund Processing**: Sistem memproses refund untuk transaksi yang sudah berstatus _Sold_.
-    - **Teknis**: Menggunakan **Goroutine** atau **Worker Pool**(saya belum pernah nyoba ini) untuk menjalankan proses refund di latar belakang (asynchronous) sehingga tidak membebani performa API utama & Loading lama.
+    - **Teknis**: Menggunakan **Goroutine** atau **Worker Pool** (saya belum pernah nyoba ini) untuk menjalankan proses refund di latar belakang (asynchronous) sehingga tidak membebani performa API utama & Loading lama.
     - **Batching**: Proses refund dikirim secara batch (misal 20 transaksi per proses) ke payment gateway melalui API `transaction_id` jika pake worker pool, 1 1 jika pake gouroutine.
 3.  **Notifikasi**: Setelah refund sukses, sistem mengirimkan email konfirmasi dan struk refund sebagai bukti kepada pelanggan.
 
