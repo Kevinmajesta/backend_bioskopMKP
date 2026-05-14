@@ -20,8 +20,7 @@ Flowchart yang menggambarkan alur proses dari pemilihan jadwal hingga pembayaran
 
 Untuk menangani akses bersamaan oleh banyak orang dan mencegah **double booking**, solusi yang saya tawarkan adalah:
 
-- **Distributed Locking dengan Redis**: Menggunakan Redis Locking (Redlock) karena performanya yang jauh lebih cepat (RAM-based) dibandingkan locking di level database.
-- **Expiration Key**: Sistem akan membuat kunci sementara dengan waktu kadaluarsa (TTL) selama **10 menit**. Selama waktu ini, kursi akan berstatus _Reserved_. Jika dalam 10 menit pembayaran tidak diselesaikan, kunci akan otomatis terhapus.
+- **Locking dengan Redis**: Menggunakan _locking_ dari redis, atau _locking_ db bebas tergantung kesepakatan, namun saya sendiri lebih suka dari redis karena redis memakan ram yang dimana lebih cepat dari pada menggunakan _locking_ db itu sendiri, jadi system membuat _key_ untuk Waktu kadaluasa pemesanan selama 10 menit untuk mencegah adanya _double booking_ dari user lain.
 
 #### **Sistem Restok Tiket**
 
@@ -36,8 +35,8 @@ Jika bioskop melakukan pembatalan jadwal tayang (status _Cancelled_):
 
 1.  **Block Payment**: Sistem secara otomatis memblokir semua proses pembayaran yang sedang berlangsung untuk jadwal tersebut.
 2.  **Async Refund Processing**: Sistem memproses refund untuk transaksi yang sudah berstatus _Sold_.
-    - **Teknis**: Menggunakan **Goroutine** atau **Worker Pool** untuk menjalankan proses refund di latar belakang (asynchronous) sehingga tidak membebani performa API utama.
-    - **Batching**: Proses refund dikirim secara batch (misal 20 transaksi per proses) ke payment gateway melalui API `transaction_id`.
+    - **Teknis**: Menggunakan **Goroutine** atau **Worker Pool**(saya belum pernah nyoba ini) untuk menjalankan proses refund di latar belakang (asynchronous) sehingga tidak membebani performa API utama & Loading lama.
+    - **Batching**: Proses refund dikirim secara batch (misal 20 transaksi per proses) ke payment gateway melalui API `transaction_id` jika pake worker pool, 1 1 jika pake gouroutine.
 3.  **Notifikasi**: Setelah refund sukses, sistem mengirimkan email konfirmasi dan struk refund sebagai bukti kepada pelanggan.
 
 ---
