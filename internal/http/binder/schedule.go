@@ -18,5 +18,5 @@ type ScheduleUpdateRequest struct {
 	StartTime   time.Time `json:"start_time"`
 	EndTime     time.Time `json:"end_time"`
 	Price       float64   `json:"price"`
-	IsCancelled *bool     `json:"is_cancelled"` // Use pointer to allow false value in partial update
+	IsCancelled *bool     `json:"is_cancelled"`
 }

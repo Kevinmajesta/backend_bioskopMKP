@@ -31,7 +31,6 @@ func (r *scheduleRepository) CreateSchedule(schedule *entity.Schedule) (*entity.
 }
 
 func (r *scheduleRepository) UpdateSchedule(id uuid.UUID, schedule *entity.Schedule) (*entity.Schedule, error) {
-	// Menggunakan map agar GORM tidak mengabaikan zero-value (seperti false atau 0)
 	fields := make(map[string]interface{})
 
 	if schedule.MovieTitle != "" {
@@ -53,7 +52,6 @@ func (r *scheduleRepository) UpdateSchedule(id uuid.UUID, schedule *entity.Sched
 		fields["price"] = schedule.Price
 	}
 
-	// Untuk boolean (pointer), kita cek apakah nil atau tidak
 	if schedule.IsCancelled != nil {
 		fields["is_cancelled"] = *schedule.IsCancelled
 	}
