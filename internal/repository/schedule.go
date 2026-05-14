@@ -31,7 +31,34 @@ func (r *scheduleRepository) CreateSchedule(schedule *entity.Schedule) (*entity.
 }
 
 func (r *scheduleRepository) UpdateSchedule(id uuid.UUID, schedule *entity.Schedule) (*entity.Schedule, error) {
-	if err := r.db.Model(&entity.Schedule{}).Where("id = ?", id).Updates(schedule).Error; err != nil {
+	// Menggunakan map agar GORM tidak mengabaikan zero-value (seperti false atau 0)
+	fields := make(map[string]interface{})
+
+	if schedule.MovieTitle != "" {
+		fields["movie_title"] = schedule.MovieTitle
+	}
+	if schedule.CinemaName != "" {
+		fields["cinema_name"] = schedule.CinemaName
+	}
+	if schedule.StudioName != "" {
+		fields["studio_name"] = schedule.StudioName
+	}
+	if !schedule.StartTime.IsZero() {
+		fields["start_time"] = schedule.StartTime
+	}
+	if !schedule.EndTime.IsZero() {
+		fields["end_time"] = schedule.EndTime
+	}
+	if schedule.Price != 0 {
+		fields["price"] = schedule.Price
+	}
+
+	// Untuk boolean (pointer), kita cek apakah nil atau tidak
+	if schedule.IsCancelled != nil {
+		fields["is_cancelled"] = *schedule.IsCancelled
+	}
+
+	if err := r.db.Model(&entity.Schedule{}).Where("id = ?", id).Updates(fields).Error; err != nil {
 		return nil, err
 	}
 	return r.FindScheduleByID(id)

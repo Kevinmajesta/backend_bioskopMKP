@@ -62,6 +62,10 @@ func (h *ScheduleHandler) Update(c echo.Context) error {
 		Price:      input.Price,
 	}
 
+	if input.IsCancelled != nil {
+		schedule.IsCancelled = input.IsCancelled
+	}
+
 	result, err := h.scheduleService.UpdateSchedule(id, schedule)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, response.ErrorResponse(http.StatusInternalServerError, err.Error()))
