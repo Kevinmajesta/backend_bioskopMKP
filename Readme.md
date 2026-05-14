@@ -47,7 +47,7 @@ Rancangan database telah disesuaikan untuk mendukung fungsionalitas di atas (Tab
 Script SQL untuk inisialisasi database dapat ditemukan di:
 
 - [PostgreSQL Script](./db/migrations/) Untuk inisialisasi database & setup database soal C
-- [ER Diagram](./relasi.drawio.png) Untuk memahami ER dari database yang sudah dibuat soal B
+- [Database Diagram](./relasi.drawio.png) Untuk memahami database yang sudah dibuat soal B
 
 ---
 
