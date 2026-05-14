@@ -12,7 +12,9 @@ import (
 	"Kevinmajesta/backend_bioskopMKP/pkg/response"
 	"Kevinmajesta/backend_bioskopMKP/pkg/route"
 	"Kevinmajesta/backend_bioskopMKP/pkg/token"
+	"Kevinmajesta/backend_bioskopMKP/pkg/validator"
 	"github.com/golang-jwt/jwt/v5"
+	v10 "github.com/go-playground/validator/v10"
 	echojwt "github.com/labstack/echo-jwt/v4"
 	"github.com/labstack/echo/v4"
 )
@@ -23,6 +25,8 @@ type Server struct {
 
 func NewServer(serverName string, publicRoutes, privateRoutes []*route.Route, secretKey string) *Server {
 	e := echo.New()
+
+	e.Validator = &validator.CustomValidator{Validator: v10.New()}
 
 	e.GET("/", func(c echo.Context) error {
 		return c.JSON(http.StatusOK, response.SuccessResponse(http.StatusOK, "Hello, World!", nil))

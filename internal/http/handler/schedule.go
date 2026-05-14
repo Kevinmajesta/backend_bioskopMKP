@@ -25,6 +25,10 @@ func (h *ScheduleHandler) Create(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, response.ErrorResponse(http.StatusBadRequest, "invalid input"))
 	}
 
+	if err := c.Validate(input); err != nil {
+		return c.JSON(http.StatusBadRequest, response.ErrorResponse(http.StatusBadRequest, err.Error()))
+	}
+
 	schedule := &entity.Schedule{
 		MovieTitle: input.MovieTitle,
 		CinemaName: input.CinemaName,
