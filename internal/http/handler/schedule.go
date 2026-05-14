@@ -2,12 +2,12 @@ package handler
 
 import (
 	"net/http"
-	"strconv"
 
 	"Kevinmajesta/backend_bioskopMKP/internal/entity"
 	"Kevinmajesta/backend_bioskopMKP/internal/http/binder"
 	"Kevinmajesta/backend_bioskopMKP/internal/service"
 	"Kevinmajesta/backend_bioskopMKP/pkg/response"
+	"github.com/google/uuid"
 	"github.com/labstack/echo/v4"
 )
 
@@ -43,7 +43,11 @@ func (h *ScheduleHandler) Create(c echo.Context) error {
 }
 
 func (h *ScheduleHandler) Update(c echo.Context) error {
-	id, _ := strconv.Atoi(c.Param("id"))
+	id, err := uuid.Parse(c.Param("id"))
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, response.ErrorResponse(http.StatusBadRequest, "invalid id format"))
+	}
+
 	input := new(binder.ScheduleUpdateRequest)
 	if err := c.Bind(input); err != nil {
 		return c.JSON(http.StatusBadRequest, response.ErrorResponse(http.StatusBadRequest, "invalid input"))
@@ -58,7 +62,7 @@ func (h *ScheduleHandler) Update(c echo.Context) error {
 		Price:      input.Price,
 	}
 
-	result, err := h.scheduleService.UpdateSchedule(uint(id), schedule)
+	result, err := h.scheduleService.UpdateSchedule(id, schedule)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, response.ErrorResponse(http.StatusInternalServerError, err.Error()))
 	}
@@ -67,8 +71,12 @@ func (h *ScheduleHandler) Update(c echo.Context) error {
 }
 
 func (h *ScheduleHandler) Delete(c echo.Context) error {
-	id, _ := strconv.Atoi(c.Param("id"))
-	if err := h.scheduleService.DeleteSchedule(uint(id)); err != nil {
+	id, err := uuid.Parse(c.Param("id"))
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, response.ErrorResponse(http.StatusBadRequest, "invalid id format"))
+	}
+
+	if err := h.scheduleService.DeleteSchedule(id); err != nil {
 		return c.JSON(http.StatusInternalServerError, response.ErrorResponse(http.StatusInternalServerError, err.Error()))
 	}
 
@@ -76,8 +84,12 @@ func (h *ScheduleHandler) Delete(c echo.Context) error {
 }
 
 func (h *ScheduleHandler) GetByID(c echo.Context) error {
-	id, _ := strconv.Atoi(c.Param("id"))
-	result, err := h.scheduleService.GetScheduleByID(uint(id))
+	id, err := uuid.Parse(c.Param("id"))
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, response.ErrorResponse(http.StatusBadRequest, "invalid id format"))
+	}
+
+	result, err := h.scheduleService.GetScheduleByID(id)
 	if err != nil {
 		return c.JSON(http.StatusNotFound, response.ErrorResponse(http.StatusNotFound, "schedule not found"))
 	}

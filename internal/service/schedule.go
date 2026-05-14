@@ -3,13 +3,14 @@ package service
 import (
 	"Kevinmajesta/backend_bioskopMKP/internal/entity"
 	"Kevinmajesta/backend_bioskopMKP/internal/repository"
+	"github.com/google/uuid"
 )
 
 type ScheduleService interface {
 	CreateSchedule(schedule *entity.Schedule) (*entity.Schedule, error)
-	UpdateSchedule(id uint, schedule *entity.Schedule) (*entity.Schedule, error)
-	DeleteSchedule(id uint) error
-	GetScheduleByID(id uint) (*entity.Schedule, error)
+	UpdateSchedule(id uuid.UUID, schedule *entity.Schedule) (*entity.Schedule, error)
+	DeleteSchedule(id uuid.UUID) error
+	GetScheduleByID(id uuid.UUID) (*entity.Schedule, error)
 	GetAllSchedules() ([]entity.Schedule, error)
 }
 
@@ -25,15 +26,15 @@ func (s *scheduleService) CreateSchedule(schedule *entity.Schedule) (*entity.Sch
 	return s.scheduleRepository.CreateSchedule(schedule)
 }
 
-func (s *scheduleService) UpdateSchedule(id uint, schedule *entity.Schedule) (*entity.Schedule, error) {
+func (s *scheduleService) UpdateSchedule(id uuid.UUID, schedule *entity.Schedule) (*entity.Schedule, error) {
 	return s.scheduleRepository.UpdateSchedule(id, schedule)
 }
 
-func (s *scheduleService) DeleteSchedule(id uint) error {
+func (s *scheduleService) DeleteSchedule(id uuid.UUID) error {
 	return s.scheduleRepository.DeleteSchedule(id)
 }
 
-func (s *scheduleService) GetScheduleByID(id uint) (*entity.Schedule, error) {
+func (s *scheduleService) GetScheduleByID(id uuid.UUID) (*entity.Schedule, error) {
 	return s.scheduleRepository.FindScheduleByID(id)
 }
 

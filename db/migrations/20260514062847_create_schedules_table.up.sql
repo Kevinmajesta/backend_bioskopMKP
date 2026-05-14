@@ -1,5 +1,5 @@
 CREATE TABLE schedules (
-    id SERIAL PRIMARY KEY,
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     movie_title VARCHAR(255) NOT NULL,
     cinema_name VARCHAR(255) NOT NULL,
     studio_name VARCHAR(255) NOT NULL,

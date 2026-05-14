@@ -77,7 +77,7 @@
               }
             },
             "url": {
-              "raw": "http://localhost:8080/app/api/v1/schedules/3",
+              "raw": "http://localhost:8080/app/api/v1/schedules/7465bc9d-fabf-4bfd-8501-38a51957b2a0",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -88,7 +88,7 @@
                 "api",
                 "v1",
                 "schedules",
-                "3"
+                "7465bc9d-fabf-4bfd-8501-38a51957b2a0"
               ]
             }
           },
@@ -100,7 +100,7 @@
             "method": "DELETE",
             "header": [],
             "url": {
-              "raw": "http://localhost:8080/app/api/v1/schedules/3",
+              "raw": "http://localhost:8080/app/api/v1/schedules/7465bc9d-fabf-4bfd-8501-38a51957b2a0",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -111,7 +111,7 @@
                 "api",
                 "v1",
                 "schedules",
-                "3"
+                "7465bc9d-fabf-4bfd-8501-38a51957b2a0"
               ]
             }
           },
@@ -178,7 +178,7 @@
     "bearer": [
       {
         "key": "token",
-        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE5NDZkNzdjLWQwN2QtNDhjNy05YWY3LTZjODFjZGFjNjlkMyIsImVtYWlsIjoia2V2aW5AZXhhbXBsZS5jb20iLCJyb2xlIjoiIn0.a3vZhcxJtj2eE1LQeX6f6ZzffAHVZ7-aCdbFP0CdEio",
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRkN2MwMDNiLWJlNGYtNDQzYS04ZDFkLTM4Nzc4OGY4NmJhNiIsImVtYWlsIjoia2V2aW5AZXhhbXBsZS5jb20iLCJyb2xlIjoiIn0.YmbIsHInyfMrDhyy_8pFWXG5EVJhAoNQu3Udd_-wcSM",
         "type": "string"
       }
     ]

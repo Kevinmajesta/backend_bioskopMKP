@@ -3,11 +3,12 @@ package entity
 import (
 	"time"
 
+	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
 type Schedule struct {
-	ID          uint           `json:"id" gorm:"primaryKey"`
+	ID          uuid.UUID      `json:"id" gorm:"primaryKey;type:uuid;default:uuid_generate_v4()"`
 	MovieTitle  string         `json:"movie_title"`
 	CinemaName  string         `json:"cinema_name"`
 	StudioName  string         `json:"studio_name"`
