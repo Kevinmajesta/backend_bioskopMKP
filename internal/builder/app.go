@@ -23,5 +23,9 @@ func BuildPublicRoutes(db *gorm.DB, tokenUseCase token.TokenUseCase,
 }
 
 func BuildPrivateRoutes(db *gorm.DB, cfg *configs.Config, tokenUseCase token.TokenUseCase) []*route.Route {
-	return router.AppPrivateRoutes()
+	scheduleRepository := repository.NewScheduleRepository(db)
+	scheduleService := service.NewScheduleService(scheduleRepository)
+	scheduleHandler := handler.NewScheduleHandler(scheduleService)
+
+	return router.AppPrivateRoutes(scheduleHandler)
 }

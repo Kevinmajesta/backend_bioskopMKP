@@ -20,7 +20,7 @@ func main() {
 	publicRoutes := builder.BuildPublicRoutes(db, tokenUseCase, cfg)
 	privateRoutes := builder.BuildPrivateRoutes(db, cfg, tokenUseCase)
 
-	srv := server.NewServer("app", publicRoutes, privateRoutes)
+	srv := server.NewServer("app", publicRoutes, privateRoutes, cfg.JWTSecret)
 	srv.Run()
 }
 

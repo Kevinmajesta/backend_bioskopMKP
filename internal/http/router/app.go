@@ -22,6 +22,32 @@ func AppPublicRoutes(userHandler *handler.UserHandler) []*route.Route {
 	}
 }
 
-func AppPrivateRoutes() []*route.Route {
-	return nil
+func AppPrivateRoutes(scheduleHandler *handler.ScheduleHandler) []*route.Route {
+	return []*route.Route{
+		{
+			Method:  http.MethodPost,
+			Path:    "/schedules",
+			Handler: scheduleHandler.Create,
+		},
+		{
+			Method:  http.MethodPut,
+			Path:    "/schedules/:id",
+			Handler: scheduleHandler.Update,
+		},
+		{
+			Method:  http.MethodDelete,
+			Path:    "/schedules/:id",
+			Handler: scheduleHandler.Delete,
+		},
+		{
+			Method:  http.MethodGet,
+			Path:    "/schedules/:id",
+			Handler: scheduleHandler.GetByID,
+		},
+		{
+			Method:  http.MethodGet,
+			Path:    "/schedules",
+			Handler: scheduleHandler.GetAll,
+		},
+	}
 }
