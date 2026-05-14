@@ -46,7 +46,8 @@ Jika bioskop melakukan pembatalan jadwal tayang (status _Cancelled_):
 Rancangan database telah disesuaikan untuk mendukung fungsionalitas di atas (Tabel User, Schedules, Seats, dan Transactions).
 Script SQL untuk inisialisasi database dapat ditemukan di:
 
-- [PostgreSQL Script](./db/migrations/)
+- [PostgreSQL Script](./db/migrations/) Untuk inisialisasi database & setup database soal C
+- [ER Diagram](./relasi.drawio.png) Untuk memahami ER dari database yang sudah dibuat soal B
 
 ---
 
