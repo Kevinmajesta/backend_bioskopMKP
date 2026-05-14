@@ -8,7 +8,7 @@ import (
 )
 
 type Schedule struct {
-	ID          uuid.UUID      `json:"id" gorm:"primaryKey;type:uuid;default:uuid_generate_v4()"`
+	Id_schedule uuid.UUID      `json:"id_schedule" gorm:"primaryKey;type:uuid;default:uuid_generate_v4()"`
 	MovieTitle  string         `json:"movie_title"`
 	CinemaName  string         `json:"cinema_name"`
 	StudioName  string         `json:"studio_name"`

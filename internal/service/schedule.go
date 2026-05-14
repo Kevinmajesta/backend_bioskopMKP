@@ -8,9 +8,9 @@ import (
 
 type ScheduleService interface {
 	CreateSchedule(schedule *entity.Schedule) (*entity.Schedule, error)
-	UpdateSchedule(id uuid.UUID, schedule *entity.Schedule) (*entity.Schedule, error)
-	DeleteSchedule(id uuid.UUID) error
-	GetScheduleByID(id uuid.UUID) (*entity.Schedule, error)
+	UpdateSchedule(id_schedule uuid.UUID, schedule *entity.Schedule) (*entity.Schedule, error)
+	DeleteSchedule(id_schedule uuid.UUID) error
+	GetScheduleByID(id_schedule uuid.UUID) (*entity.Schedule, error)
 	GetAllSchedules() ([]entity.Schedule, error)
 }
 
@@ -30,12 +30,12 @@ func (s *scheduleService) UpdateSchedule(id uuid.UUID, schedule *entity.Schedule
 	return s.scheduleRepository.UpdateSchedule(id, schedule)
 }
 
-func (s *scheduleService) DeleteSchedule(id uuid.UUID) error {
-	return s.scheduleRepository.DeleteSchedule(id)
+func (s *scheduleService) DeleteSchedule(id_schedule uuid.UUID) error {
+	return s.scheduleRepository.DeleteSchedule(id_schedule)
 }
 
-func (s *scheduleService) GetScheduleByID(id uuid.UUID) (*entity.Schedule, error) {
-	return s.scheduleRepository.FindScheduleByID(id)
+func (s *scheduleService) GetScheduleByID(id_schedule uuid.UUID) (*entity.Schedule, error) {
+	return s.scheduleRepository.FindScheduleByID(id_schedule)
 }
 
 func (s *scheduleService) GetAllSchedules() ([]entity.Schedule, error) {

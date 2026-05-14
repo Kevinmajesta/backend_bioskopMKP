@@ -9,9 +9,9 @@ import (
 
 type ScheduleRepository interface {
 	CreateSchedule(schedule *entity.Schedule) (*entity.Schedule, error)
-	UpdateSchedule(id uuid.UUID, schedule *entity.Schedule) (*entity.Schedule, error)
-	DeleteSchedule(id uuid.UUID) error
-	FindScheduleByID(id uuid.UUID) (*entity.Schedule, error)
+	UpdateSchedule(id_schedule uuid.UUID, schedule *entity.Schedule) (*entity.Schedule, error)
+	DeleteSchedule(id_schedule uuid.UUID) error
+	FindScheduleByID(id_schedule uuid.UUID) (*entity.Schedule, error)
 	FindAllSchedules() ([]entity.Schedule, error)
 }
 
@@ -30,7 +30,7 @@ func (r *scheduleRepository) CreateSchedule(schedule *entity.Schedule) (*entity.
 	return schedule, nil
 }
 
-func (r *scheduleRepository) UpdateSchedule(id uuid.UUID, schedule *entity.Schedule) (*entity.Schedule, error) {
+func (r *scheduleRepository) UpdateSchedule(id_schedule uuid.UUID, schedule *entity.Schedule) (*entity.Schedule, error) {
 	fields := make(map[string]interface{})
 
 	if schedule.MovieTitle != "" {
@@ -56,19 +56,19 @@ func (r *scheduleRepository) UpdateSchedule(id uuid.UUID, schedule *entity.Sched
 		fields["is_cancelled"] = *schedule.IsCancelled
 	}
 
-	if err := r.db.Model(&entity.Schedule{}).Where("id = ?", id).Updates(fields).Error; err != nil {
+	if err := r.db.Model(&entity.Schedule{}).Where("id_schedule = ?", id_schedule).Updates(fields).Error; err != nil {
 		return nil, err
 	}
-	return r.FindScheduleByID(id)
+	return r.FindScheduleByID(id_schedule)
 }
 
-func (r *scheduleRepository) DeleteSchedule(id uuid.UUID) error {
-	return r.db.Delete(&entity.Schedule{}, id).Error
+func (r *scheduleRepository) DeleteSchedule(id_schedule uuid.UUID) error {
+	return r.db.Delete(&entity.Schedule{}, id_schedule).Error
 }
 
-func (r *scheduleRepository) FindScheduleByID(id uuid.UUID) (*entity.Schedule, error) {
+func (r *scheduleRepository) FindScheduleByID(id_schedule uuid.UUID) (*entity.Schedule, error) {
 	schedule := new(entity.Schedule)
-	if err := r.db.Where("id = ?", id).First(schedule).Error; err != nil {
+	if err := r.db.Where("id_schedule = ?", id_schedule).First(schedule).Error; err != nil {
 		return nil, err
 	}
 	return schedule, nil

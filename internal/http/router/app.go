@@ -31,17 +31,17 @@ func AppPrivateRoutes(scheduleHandler *handler.ScheduleHandler) []*route.Route {
 		},
 		{
 			Method:  http.MethodPut,
-			Path:    "/schedules/:id",
+			Path:    "/schedules/:id_schedule",
 			Handler: scheduleHandler.Update,
 		},
 		{
 			Method:  http.MethodDelete,
-			Path:    "/schedules/:id",
+			Path:    "/schedules/:id_schedule",
 			Handler: scheduleHandler.Delete,
 		},
 		{
 			Method:  http.MethodGet,
-			Path:    "/schedules/:id",
+			Path:    "/schedules/:id_schedule",
 			Handler: scheduleHandler.GetByID,
 		},
 		{

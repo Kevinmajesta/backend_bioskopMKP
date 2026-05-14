@@ -43,7 +43,7 @@ func (h *ScheduleHandler) Create(c echo.Context) error {
 }
 
 func (h *ScheduleHandler) Update(c echo.Context) error {
-	id, err := uuid.Parse(c.Param("id"))
+	id, err := uuid.Parse(c.Param("id_schedule"))
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, response.ErrorResponse(http.StatusBadRequest, "invalid id format"))
 	}
@@ -75,7 +75,7 @@ func (h *ScheduleHandler) Update(c echo.Context) error {
 }
 
 func (h *ScheduleHandler) Delete(c echo.Context) error {
-	id, err := uuid.Parse(c.Param("id"))
+	id, err := uuid.Parse(c.Param("id_schedule"))
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, response.ErrorResponse(http.StatusBadRequest, "invalid id format"))
 	}
@@ -88,7 +88,7 @@ func (h *ScheduleHandler) Delete(c echo.Context) error {
 }
 
 func (h *ScheduleHandler) GetByID(c echo.Context) error {
-	id, err := uuid.Parse(c.Param("id"))
+	id, err := uuid.Parse(c.Param("id_schedule"))
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, response.ErrorResponse(http.StatusBadRequest, "invalid id format"))
 	}
